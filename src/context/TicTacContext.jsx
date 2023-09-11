@@ -18,24 +18,41 @@ function TicTacProvider({children}) {
   const [currentPlayer, setCurrentPlaye] = useState("X");
   const [winnerPlayer, setWinnerPlayer] = useState("");
   const [isFinished, setIsFinished] = useState(false);
+  const [isEqual,setIsEqual] = useState(false)
 
   function handleAddText(index) {
     if (!emptyArray[index]) {
       emptyArray[index] = currentPlayer;
+      setCurrentPlaye((currentPlayer) => (currentPlayer == "X" ? "O" : "X"));
     }
+   
+    handleLosLoser()    
+ 
+     handleWinner()
+  }
 
-    
+  function handleLosLoser() {
+    if(!emptyArray.includes(null) && !winGame()) {
+      setIsEqual(true)
+      setIsFinished(false)
+     }
+  }
+
+  function handleWinner() {
     if (winGame()) {
-        const winner = winGame();
-        setWinnerPlayer(emptyArray[winner[0]]);
-        setIsFinished(true);
-    }
-    setCurrentPlaye((currentPlayer) => (currentPlayer == "X" ? "O" : "X"));
+      const winner = winGame();
+      setWinnerPlayer(emptyArray[winner[0]]);
+      setIsFinished(true);
+      setIsEqual(false)
+  }
   }
 
   function handleReset() {
     setEmptyArray(Array(9).fill(null));
     setIsFinished(false);
+    setIsEqual(false)
+    setCurrentPlaye("X")
+    setWinnerPlayer("")
   }
 
   function winGame() {
@@ -58,7 +75,8 @@ function TicTacProvider({children}) {
             winnerPlayer,
             onReset:handleReset,
             onAddText:handleAddText,
-            isFinished
+            isFinished,
+            isEqual
         }}>
             {children}
         </tictacContext.Provider>

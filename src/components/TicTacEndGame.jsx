@@ -1,10 +1,11 @@
 import { useTicTac } from "../context/TicTacContext"
 
-function TicTacEndGame() {
-    const {winnerPlayer , onReset} = useTicTac()
+// eslint-disable-next-line react/prop-types
+function TicTacEndGame({children}) {
+    const {  onReset} = useTicTac()
     return (
         <div className="winner-container">
-        <h2>{winnerPlayer} Wins</h2>
+        {children}
         <button onClick={onReset}>Reset</button>
       </div>
     )

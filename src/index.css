@@ -155,7 +155,20 @@ button:hover {
 }
 
 .winner-container h2 {
-    font-size: 4.2rem;
+    font-size: 3.5rem;
+}
+
+.players {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+    gap: 40px;
+}
+
+.players span {
+    color: #F2C14E;
+    font-size: 2.4rem;
 }
 
 /* BELOW 288px */
